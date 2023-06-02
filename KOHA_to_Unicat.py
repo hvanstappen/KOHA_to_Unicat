@@ -78,8 +78,7 @@ response = requests.get(url, auth=(username, password))
 # Checking the response status code
 if response.status_code == 200:
     # Successful request
-    xml_data = response.text  # Get the response content as bytes
-##    xml_data = response.content  # Get the response content as bytes
+    xml_data = response.content.decode('UTF-8')
     # Process the XML data as needed
     root = ET.fromstring(xml_data)  # Parse the XML data
     # Access XML elements, attributes, etc.
