@@ -83,8 +83,7 @@ if response.status_code == 200:
     # Process the XML data as needed
     root = ET.fromstring(xml_data)  # Parse the XML data
     # Access XML elements, attributes, etc.
-#    for child in root:
-#        print(child.tag, child.attrib)
+
 else:
     # Request was not successful
     print("Error:", response.status_code)
@@ -117,12 +116,20 @@ for record in root.findall('marc:record', namespace):
 update_record_count = 0
 for record in selected_records:
     update_record_count = update_record_count + 1
-    # find values from KOHA element 001
+    
+    # find values from KOHA element 001, create one if empty
     controlfield_001 = record.find("marc:controlfield[@tag='001']", namespace)
     if controlfield_001 is not None and controlfield_001.text is not None:
         controlfield_001_text = controlfield_001.text
     else:
         controlfield_001_text = ""
+
+    # replace values for KOHA element 001 with value datafield 999 subfield c
+    controlfield_001 = record.find("marc:controlfield[@tag='001']", namespace)
+    datafield_999c = record.find("marc:datafield[@tag='999']/marc:subfield[@code='c']", namespace)
+    if controlfield_001 is not None and datafield_999c is not None:
+        controlfield_001.text = datafield_999c.text
+
 
     # create element 852 [(repeatable) is to be supplied using the Antilope model]
     datafield_852 = ET.Element('datafield')
@@ -191,7 +198,7 @@ if selected_records:
     tree = ET.ElementTree(new_root)
 
     # write the ElementTree to the file
-    tree.write(dump_name, xml_declaration=True, encoding='utf-8')
+    tree.write(dump_name, xml_declaration=True, encoding='UTF-8')
 
     print("\nSuccess :-)")
     print("Records worden bewaard als ", dump_name)
@@ -228,5 +235,3 @@ with open("log.txt", "a") as file:
     file.write("==============\n")
     
 print("Klaar!")
-
-
