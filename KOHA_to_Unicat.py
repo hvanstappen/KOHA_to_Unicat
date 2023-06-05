@@ -145,7 +145,8 @@ for record in selected_records:
     # create element 919 [identifier of the institution]
     datafield_919 = ET.Element('datafield')
     datafield_919.set('tag', '919')
-    datafield_919.text = 'BE-BxLRC'
+    subfield_a = ET.SubElement(datafield_919, 'subfield', {'code': 'a'})
+    subfield_a.text = 'BE-BxLRC'
 
     record.append(datafield_919)
 
@@ -177,8 +178,10 @@ for record in selected_records:
     # create element 920
     datafield_920 = ET.Element('datafield')
     datafield_920.set('tag', '920')
-    datafield_920.text = datafield_942
 
+    subfield_a = ET.SubElement(datafield_920, 'subfield', {'code': 'a'})
+    subfield_a.text = datafield_942
+    
     record.append(datafield_920)
 
 
