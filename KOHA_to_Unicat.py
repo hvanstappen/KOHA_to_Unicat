@@ -146,7 +146,7 @@ for record in selected_records:
     datafield_919 = ET.Element('datafield')
     datafield_919.set('tag', '919')
     subfield_a = ET.SubElement(datafield_919, 'subfield', {'code': 'a'})
-    subfield_a.text = 'BE-BxLRC'
+    subfield_a.text = 'B-Bc'
 
     record.append(datafield_919)
 
