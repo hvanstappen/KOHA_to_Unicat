@@ -1,5 +1,5 @@
 # KOHA_to_Unicat
-post library records from KOHA to Unicat
+Get library records from KOHA, transform and post to Unicat https://www.unicat.be/
 
 ## Installation
 - copy both files to a folder on your hard drive
@@ -7,7 +7,7 @@ post library records from KOHA to Unicat
 - if you run the script on a regular basis (e.g. weekly CRON job), set the frequency in the config.py accordingly (e.g. 7 [days])
 
 ## Usage
-1. Launch the script (e.g. `$ python3 KOGA_to_Unicat.py`)
+1. Launch the script (e.g. `$ python3 KOHA_to_Unicat.py`)
 2. Enter the start date. There are 3 options:
     1. do not enter a value (or wait 60 seconds) → the records created or modified last week are processed
     2. type a date in the format YYYYMMDD (e.g. 20230501 for May 1, 2023) → all records created or modified after this date will be processed.
